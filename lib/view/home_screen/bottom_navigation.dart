@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m_call/view/contact/contact_page.dart';
+import 'package:m_call/view/favorite/favorite.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final List<Widget> _pages = [
     ContactPage(),
-    Center(child: Text('Search Page')),
+   Favoritepage()
    
   ];
 

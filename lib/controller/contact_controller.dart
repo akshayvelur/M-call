@@ -12,13 +12,5 @@ import 'package:firebase_auth/firebase_auth.dart';
   }catch(e){
  log(e.toString());
   }
- // data adding into contacts
- try{
-DocumentSnapshot snapshot= await _firestore.collection("users").doc(_auth.currentUser!.uid).get();
-List<dynamic>data=snapshot.get("contacts");
-data.add(newContact["firstname"]);
- await _firestore.collection("users").doc(_auth.currentUser!.uid).update({"contacts":data}); 
- }catch(e){
-  log(e.toString());
- }
+
   }

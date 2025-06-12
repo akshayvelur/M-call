@@ -18,9 +18,13 @@ class AddContact extends StatelessWidget {
     return BlocConsumer<AddContactBloc, AddContactState>(
       listener: (context, state) {
         // TODO: implement listener
+        if(state is AddContactSubmit){
+          Navigator.pop(context);
+        }
       },
       builder: (context, state) {
-        return Form(key: formKey,
+        return Form(
+          key: formKey,
           child: Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -33,24 +37,24 @@ class AddContact extends StatelessWidget {
                 ),
               ),
               centerTitle: true,
-              title: Text("New Contact", style: GoogleFonts.roboto(fontSize: 20)),
+              title: Text(
+                "New Contact",
+                style: GoogleFonts.roboto(fontSize: 20),
+              ),
               actions: [
                 IconButton(
                   onPressed: () {
-
-                 if(formKey.currentState!.validate()){
-                       context.read<AddContactBloc>().add(
-                      
-                      AddContactDataEvent(
-                        firstname: _fristname.text,
-                        lastname: _lastname.text,
-                        mobile: _mobile.text,
-                        email: _email.text,
-                        company: _company.text,
-                      ),
-                    );
-                 }   
-                  
+                    if (formKey.currentState!.validate()) {
+                      context.read<AddContactBloc>().add(
+                        AddContactDataEvent(
+                          firstname: _fristname.text,
+                          lastname: _lastname.text,
+                          mobile: _mobile.text,
+                          email: _email.text,
+                          company: _company.text,
+                        ),
+                      );
+                    }
                   },
                   icon: Icon(Icons.check),
                   color: Colors.green,
@@ -67,11 +71,12 @@ class AddContact extends StatelessWidget {
                     children: [
                       SizedBox(height: 10),
                       // first name
-                      TextFormField(validator: (value) {
-                       if(value==null||value.isEmpty){
-                        return "please enter name";
-                       }
-                      },
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "please enter name";
+                          }
+                        },
                         controller: _fristname,
                         decoration: InputDecoration(
                           labelText: "First name",
@@ -95,11 +100,12 @@ class AddContact extends StatelessWidget {
                       ),
                       SizedBox(height: mediaqueryHight(.05, context)),
                       // Email
-                      TextFormField(validator: (value) {
-                          if(value==null||value.isEmpty){
-                        return "please enter mobile number";
-                       }
-                      },
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "please enter mobile number";
+                          }
+                        },
                         controller: _mobile,
                         keyboardType: TextInputType.numberWithOptions(),
                         decoration: InputDecoration(

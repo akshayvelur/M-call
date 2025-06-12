@@ -12,10 +12,11 @@ class AddContactBloc extends Bloc<AddContactEvent, AddContactState> {
   on<AddContactDataEvent>(addContactDataEvent);
   }
 
-  FutureOr<void> addContactDataEvent(AddContactDataEvent event, Emitter<AddContactState> emit) {
-print("contact get");
-Map<String,dynamic>newContact={"firstname":event.firstname,
-"lastname":event.lastname,"mobile":event.mobile,"email":event.email,"company":event.company};
-addContactData(newContact);
+  FutureOr<void> addContactDataEvent(AddContactDataEvent event, Emitter<AddContactState> emit) async{
+// print("contact get");
+  Map<String,dynamic>newContact={"firstname":event.firstname,
+  "lastname":event.lastname,"mobile":event.mobile,"email":event.email,"company":event.company,"favorite":false};
+ await addContactData(newContact);
+ emit(AddContactSubmit());
   }
 }
