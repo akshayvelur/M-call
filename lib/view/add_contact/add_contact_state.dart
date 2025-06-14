@@ -5,3 +5,4 @@ abstract class AddContactState {}
 
 class AddContactInitial extends AddContactState {}
 class AddContactSubmit extends AddContactState{}
+class EditContactDataState extends AddContactState{}

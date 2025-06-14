@@ -7,3 +7,4 @@ double mediaqueryHight(double x, context) {
 double mediaqueryWidth(double x, context) {
   return MediaQuery.of(context).size.width * x;
 }
+ 

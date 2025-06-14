@@ -36,10 +36,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final user=auth.currentUser;
       if(user==null){
      await googleAuthService();
+  if(auth.currentUser!.uid.isNotEmpty){
    emit(loggedState());
+  }
+
     }else{
         
-   print(user!.displayName);
+
      }
  
   }

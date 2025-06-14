@@ -17,12 +17,11 @@ googleAuthService() async {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-  
+ 
       try {
-        await FirebaseAuth.instance.signInWithCredential(credential);
+     await FirebaseAuth.instance.signInWithCredential(credential);
+  
         await _firestore.collection("users").doc(_auth.currentUser!.uid).set({
-          "contacts":[],
-          "favorite": [],
           "uid":_auth.currentUser!.uid
         });
       } catch (e) {

@@ -6,7 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m_call/controller/authentication.dart';
+import 'package:m_call/controller/contact_controller.dart';
 import 'package:m_call/view/add_contact/add_contact.dart';
+import 'package:m_call/view/contact_view/contact_view.dart';
 import 'package:m_call/view/login_screen/login_screen.dart';
 import 'package:m_call/view/utils/fade_transition.dart';
 import 'package:m_call/view/utils/mediaquery.dart';
@@ -33,6 +35,22 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actionsPadding: EdgeInsets.only(left: 10),
+        leading: InkWell(
+          onTap: () {
+            SignOut();
+            Navigator.pushReplacement(
+              context,
+              FadeTransitionPageRoute(child: LoginScreen()),
+            );
+          },
+          child: Image.asset("assets/logout.png", width: 35, height: 35),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Contacts",
+          style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
         leadingWidth: 25,
         titleSpacing: 25,
         automaticallyImplyLeading: false,
@@ -77,23 +95,35 @@ class _ContactPageState extends State<ContactPage> {
                   return ListView.builder(
                     itemCount: contacts.length,
                     itemBuilder: (context, index) {
-                      Map<String,dynamic>view=contacts[index];
+                      Map<String, dynamic> view = contacts[index];
                       return Padding(
                         padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: InkWell(onTap: () {
-                       
-                        },
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              FadeTransitionPageRoute(
+                                child: ContactViewPage(
+                                  selectedContact: contacts[index],
+                                ),
+                              ),
+                            );
+                          },
                           child: ListTile(
                             contentPadding: EdgeInsets.only(left: 18),
-                            title: Text(contacts[index]["firstname"]),
+                            title: Text(
+                              "${contacts[index]["firstname"]} ${contacts[index]["lastname"]}",
+                            ),
                             trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                addFavorite(view);
+                              },
                               icon: Icon(
                                 Icons.favorite,
                                 color:
                                     contacts[index]["favorite"]
-                                        ? Colors.white
-                                        : Colors.red,
+                                        ? Colors.red
+                                        : Colors.white,
                               ),
                             ),
                           ),
